@@ -1,6 +1,8 @@
 # Ionic-Angular-mobile-app
 Roux Academy Conference Hybrid Mobile App
 
+![Image](app-screen-shot.png)
+
 [Click link to view live version of website](http://bugsyalexander.github.io/Ionic-Angular-mobile-app)
 
 Features:
