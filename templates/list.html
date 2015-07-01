@@ -1,0 +1,63 @@
+<ion-view view-title="Artist List">
+  
+  <!-- Delete btn -->
+  <ion-nav-buttons side="primary">
+    <button 
+      class="button button-icon ion-minus-circled"
+      ng-click="data.showDelete = !data.showDelete; data.showReorder = false;">
+    </button>
+  </ion-nav-buttons>
+
+  <!-- Reorder btn -->
+  <ion-nav-buttons side="secondary">
+    <button 
+      class="button button-icon ion-navicon"
+      ng-click="data.showReorder = !data.showReorder; data.showDelete = false;">
+    </button>
+  </ion-nav-buttons>
+
+  <!-- Search Input -->
+  <div class="bar bar-subheader item-input-inset bar-light">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+    <input type="search" ng-model="query" placeholder="Search">
+    </label>
+  </div>
+  <!-- End Search Input-->
+
+
+
+<!-- Page Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<ion-content class="has-subheader">
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+  <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+  <ion-item class="item-thumbnail-left item-icon-right item-text-wrap" ng-repeat="item in artists | filter: query" ng-class="{'star': item.star}" href="#/tab/list/{{item.shortname}}">
+    <img ng-src="img/{{item.shortname}}_tn.jpg" alt="{{item.name}} Photo">
+    <h2>{{ item.name }}</h2>
+    <h3>{{ item.reknown }}</h3>
+    <p>{{ item.bio | limitTo: 100}}{{item.bio.length > 150 ? '&hellip;' : '' }}</p>
+
+    <!-- Star btn -->
+    <button class="button button-clear icon ion-star button-assertive" ng-click="toggleStar(item)" ng-show="item.star"></button>
+    <!-- End Star btn -->
+    
+    <!-- Star show -->
+    <ion-option-button class="button-dark" ng-click="toggleStar(item)"><i class="icon ion-star"></i></ion-option-button>
+    <!-- End Star show -->
+
+    <!-- Delete btn -->
+    <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+    <!-- End Delete btn -->
+
+    <!-- Reorder btn -->
+    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+    <!-- End Reorder btn -->
+  </ion-item>
+
+  </ion-list>
+</ion-content> 
+<!-- end page content -->
+</ion-view>
